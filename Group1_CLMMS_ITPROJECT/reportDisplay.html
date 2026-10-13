@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLMMS - Maintenance Reports</title>
+    <link rel="stylesheet" href="css/ReportsStyle.css">
+</head>
+<body>
+
+    <div id="header">
+        <div class="brand">
+            <div class="logo">
+                <img src="images/logo.png" alt="CLMMS Logo">
+            </div>
+            <div class="name">
+                <h2>CLMMS</h2>
+            </div>
+        </div>
+
+        <div class="navBar">
+            <nav>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="issueReports.html">Report Issue</a></li>
+                    <li><a href="reportDisplay.html" class="active">Reports</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+            </nav>
+        </div>
+    </div>
+
+    <div class="main">
+        <h1>Maintenance Reports</h1>
+        <p class="subtitle">Track reported computer issues.</p>
+
+        <div class="report-box">
+            <div class="report-icon">📋</div>
+            <h2>No reports yet.</h2>
+            <p>There are currently no maintenance reports.</p>
+            <button type="button" href="issueReports.html" class="button" onclick="issueReport">Report an Issue</button>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="brand">
+            <div class="logo">
+                <img src="images/logo.png" alt="CLMMS Logo">
+            </div>
+            <div class="name">
+                <h2>CLMMS</h2>
+            </div>
+        </div>
+        <p>Better Labs. Better Learning.</p>
+    </div>
+
+    <script>
+        function renderReports() {
+            const reports = JSON.parse(localStorage.getItem('clmms_reports')) || [];
+            const mainContainer = document.querySelector('.main');
+
+            if (reports.length === 0) {
+      // Empty state template
+            mainContainer.innerHTML = `
+                <h1>Maintenance Reports</h1>
+                <p class="subtitle">Track reported computer issues.</p>
+                <div class="report-box">
+                <div class="report-icon">📋</div>
+                <h2>No reports yet.</h2>
+                <p>There are currently no maintenance reports.</p>
+                <a href="issueReports.html" class="button">Report an Issue</a>
+                </div>
+            `;
+            return;
+            }
+
+    // Render reports table when data exists
+            let rowsHtml = reports.map((rep, index) => `
+            <tr>
+                <td><strong>${rep.pcNumber}</strong></td>
+                <td>${rep.problemType}</td>
+                <td>${rep.description}</td>
+                <td>${rep.reporterName}</td>
+                <td>${rep.date}</td>
+                <td>
+                <select onchange="updateStatus(${index}, this.value)">
+                    <option value="Pending" ${rep.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                    <option value="In Progress" ${rep.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                    <option value="Fixed" ${rep.status === 'Fixed' ? 'selected' : ''}>Fixed</option>
+                </select>
+                </td>
+                <td>
+                <button style="color: red; cursor: pointer;" onclick="deleteReport(${index})">Delete</button>
+                </td>
+            </tr>
+            `).join('');
+
+            mainContainer.innerHTML = `
+            <h1>Maintenance Reports</h1>
+            <p class="subtitle">Track reported computer issues.</p>
+            <div style="margin-bottom: 15px;">
+                <a href="issueReports.html" class="button" style="padding: 8px 16px; text-decoration: none;">+ Report New Issue</a>
+            </div>
+            <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left; border-collapse: collapse; background: #fff;">
+                <thead>
+                <tr style="background: #f4f4f4;">
+                    <th>PC</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Reported By</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                ${rowsHtml}
+                </tbody>
+            </table>
+            `;
+        }
+
+        function updateStatus(index, newStatus) {
+            const reports = JSON.parse(localStorage.getItem('clmms_reports')) || [];
+            reports[index].status = newStatus;
+            localStorage.setItem('clmms_reports', JSON.stringify(reports));
+        }
+
+        function deleteReport(index) {
+            if (confirm('Are you sure you want to delete this report?')) {
+            const reports = JSON.parse(localStorage.getItem('clmms_reports')) || [];
+        reports.splice(index, 1);
+        localStorage.setItem('clmms_reports', JSON.stringify(reports));
+        renderReports();
+        }
+    }
+
+  document.addEventListener('DOMContentLoaded', renderReports);
+</script>
+</body>
+</html>

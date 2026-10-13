@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet "href="css/indexstyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id="header">
+		<div class="brand">
+			<div class="logo"><img src="images/logo.png"></div>
+			<div class="name"><h2>CLMMS</h2></div>
+		</div>
+		<div class="navBar">
+			<nav>
+				<li><a href="index.html" class="active">Home</a></li>
+				<li><a href="issueReports.html">Report Issue</a></li>
+				<li><a href="reportDisplay.html">Reports</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><a href="gallery.html">Gallery</a></li>
+			</nav>
+		</div>
+	</div>
+
+	<div class="slideshow">
+		<div class="slideshow-content">
+			<img src="images/Computerlab.png">
+			<div class="slideshow-text">
+				<h1>Computer Laboratory<br> Maintenance Management<br>System</h1>
+				<p>Report, Track and Manage computer laboratory<br>issues in one place</p>
+				<a href="issueReports.html" class="buttonReport">Report an issue &#8594;</a>
+			</div>
+		</div>
+		<div class="slideshow-content">
+			<img src="images/Computerlab2.png">
+			<div class="slideshow-text">
+				<h1>Computer Laboratory<br> Maintenance Management<br>System</h1>
+				<p>Report, Track and Manage computer laboratory<br>issues in one place</p>
+				<a href="report" class="buttonReport">Report an issue &#8594;</a>
+			</div>
+		</div>
+		<div class="slideshow-content">
+			<img src="images/Computerlab3.png">
+			<div class="slideshow-text">
+				<h1>Computer Laboratory<br> Maintenance Management<br>System</h1>
+				<p>Report, Track and Manage computer laboratory<br>issues in one place</p>
+				<a href="report" class="buttonReport">Report an issue &#8594;</a>
+			</div>
+		</div>
+		<a class="prev" onclick="plusSlides(-1)">❮</a>
+		<a class="next" onclick="plusSlides(1)">❯</a>
+	</div>
+
+	<div class="cards-container">
+	<div class="card">
+		<p class="icon">!</p>
+		<p class="label">Pending Issues</p>
+		<p class="inputs" id="count-pending">0</p>
+	</div>
+	<div class="card">
+		<p class="icon">&#9881;</p>
+		<p class="label">In Progress</p>
+		<p class="inputs" id="count-progress">0</p>
+	</div>
+	<div class="card">
+		<p class="icon">&#10003;</p>
+		<p class="label">Fixed</p>
+		<p class="inputs" id="count-fixed">0</p>
+	</div>
+	<div class="card">
+		<p class="icon">&#128421;</p>
+		<p class="label">Total Computers</p>
+		<p class="inputs" id="count-total">4</p> <!-- Set your lab's total PC count here -->
+	</div>		
+</div>
+
+	<div class="quick-actions-container">
+		<h2 class="quick-actions-title">Quick Actions</h2>
+		<div class="quick-actions-grid">
+			<a href="issueReports.html" class="action-card">
+				<div class="action-icon">&#128221;</div>
+				<h3>Report Issue</h3>
+				<p>Submit a computer problem.</p>
+			</a>
+			<a href="reportDisplay.html" class="action-card">
+				<div class="action-icon">&#128203;</div>
+				<h3>View Reports</h3>
+				<p>Check maintenance status.</p>
+			</a>
+			<a href="about.html" class="action-card">
+				<div class="action-icon">&#128444;</div>
+				<h3>About Us</h3>
+				<p>Learn more about our system.</p>
+			</a>
+			<a href="gallery.html" class="action-card">
+				<div class="action-icon">&#128247;</div>
+				<h3>Gallery</h3>
+				<p>See our computer lab facilities.</p>
+			</a>
+		</div>
+
+		<div class="video-card">
+			<div class="video-wrapper">
+				<iframe src="" title="" allowfullscreen></iframe>
+			</div>
+			<div class="video-info">
+				<h3 class="vidtitle">Watch: How to Report an Issue</h3>
+				<p class="vidDesc">A quick guide on how to use the system.</p>
+			</div>
+			<a href="watchvid" class="buttonReport">Watch Video</a>
+		</div>
+	</div>
+
+	<div id="footer">
+		<div class="brand">
+			<div class="logo"><img src="images/logo.png"></div>
+			<div class="name"><h2>CLMMS</h2></div>
+		</div>
+			<div class="social-icons">
+				<a href="#" class="fa fa-facebook"></a>
+				<a href="#" class="fa fa-google"></a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		let slideIndex = 1;
+		showSlides(slideIndex);
+		function plusSlides(n) {
+			showSlides(slideIndex += n);
+		}
+		function showSlides(n) {
+			let i;
+			let slides = document.getElementsByClassName("slideshow-content");
+			if (n > slides.length) { slideIndex = 1; }
+			if (n < 1) { slideIndex = slides.length; }
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slides[slideIndex - 1].style.display = "block";
+		}
+
+		function updateCounters() {
+			const reports = JSON.parse(localStorage.getItem('clmms_reports')) || [];
+
+			const pending = reports.filter(r => r.status === 'Pending').length;
+			const inProgress = reports.filter(r => r.status === 'In Progress').length;
+			const fixed = reports.filter(r => r.status === 'Fixed').length;
+
+			const pendingEl = document.getElementById('count-pending');
+			const progressEl = document.getElementById('count-progress');
+			const fixedEl = document.getElementById('count-fixed');
+
+			if (pendingEl) pendingEl.textContent = pending;
+			if (progressEl) progressEl.textContent = inProgress;
+			if (fixedEl) fixedEl.textContent = fixed;
+		}
+
+		document.addEventListener('DOMContentLoaded', updateCounters);
+	</script>
+</body>
+</html>

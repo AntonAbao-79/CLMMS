@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLMMS - Report an Issue</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f1fbfc;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER FIXES */
+        #header {
+            display: flex;
+            padding: 30px 20px;
+            background-color: #014377;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+        }
+
+        .brand {
+            gap: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: white;
+            font-size: 28px;
+        }
+        .logo img {
+            filter: brightness(0) invert(-1);
+            width: 60px;
+            height: auto;
+            background-color: #f1fbfc;
+            mix-blend-mode: screen;
+        }
+
+        .name h2 {
+            color: white;
+            font-size: 26px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .navBar {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .navBar nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .navBar nav ul li a {
+            color: white;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 8px 11px;
+            font-weight: bold;
+            display: inline-block;
+            transition: border-bottom 0.2s ease;
+        }
+        .navBar nav ul li a.active {
+            border-bottom: 3px solid white;
+            padding-bottom: 5px;
+        }
+        /* MAIN CONTENT */
+        main {
+            flex: 1;
+            max-width: 1000px;
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        .page-title-section {
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            color: #0b3c5d;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .content-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .form-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .pc-group {
+            margin-bottom: 20px;
+        }
+
+        .pc-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .required-star {
+            color: #d9534f;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #328cc1;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background-color: #e3f2fd;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .sidebar-title {
+            color: #0b3c5d;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #b3d7ff;
+            padding-bottom: 10px;
+        }
+
+        .problem-list {
+            list-style: none;
+        }
+
+        .problem-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .problem-item i {
+            color: #0b3c5d;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* FOOTER FIXES */
+        #footer {
+            display: flex;
+            padding: 20px 40px;
+            background-color: #014377;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .social-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .social-icons a {
+            width: 32px;
+            height: 32px;
+            background-color: white;
+            color: #014377;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media screen and (max-width: 786px) {
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+            #header, #footer {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+                text-align: center;
+            }
+            .navBar {
+                flex-direction: column;
+            }
+            .navBar nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Corrected Header Section -->
+    <div id="header">
+        <div class="brand">
+            <div class="logo"><img src="images/logo.png"></div>
+            <div class="name"><h2>CLMMS</h2></div>
+        </div>
+        <div class="navBar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="issueReports.html" class="active">Report Issue</a></li>
+                    <li><a href="reportDisplay.html">Reports</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="page-title-section">
+            <h1 class="page-title"><i class="fa-solid fa-wrench"></i> Report an Issue</h1>
+            <p class="page-subtitle">Encountered a problem with a computer? Fill out the form below.</p>
+        </div>
+
+        <div class="content-container">
+            <section class="form-card">
+                <form id="reportForm">
+                    <div class="pc-group">
+                        <label for="pcNumber">PC Number <span class="required-star">*</span></label>
+                        <select id="pcNumber" class="form-control" required>
+                            <option value="" disabled selected>Select PC number</option>
+                            <option value="PC-01">PC-01</option>
+                            <option value="PC-02">PC-02</option>
+                            <option value="PC-03">PC-03</option>
+                            <option value="PC-04">PC-04</option>
+                        </select>
+                    </div>
+
+                    <div class="pc-group">
+                        <label for="problemType">Problem Type <span class="required-star">*</span></label>
+                        <select id="problemType" class="form-control" required>
+                            <option value="" disabled selected>Select problem type</option>
+                            <option value="Keyboard">Keyboard</option>
+                            <option value="Mouse">Mouse</option>
+                            <option value="Monitor">Monitor</option>
+                            <option value="CPU">CPU</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="pc-group">
+                        <label for="description">Description <span class="required-star">*</span></label>
+                        <textarea id="description" class="form-control" placeholder="Please describe the issue in detail..." required></textarea>
+                    </div>
+
+                    <div class="pc-group">
+                        <label for="yourName">Your Name (Optional)</label>
+                        <input type="text" id="yourName" class="form-control" placeholder="e.g. Juan Dela Cruz">
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Report
+                    </button>
+                </form>
+            </section>
+
+            <aside class="sidebar">
+                <h2 class="sidebar-title">Common Problem Types</h2>
+                <ul class="problem-list">
+                    <li class="problem-item"><i class="fa-solid fa-keyboard"></i> Keyboard</li>
+                    <li class="problem-item"><i class="fa-solid fa-computer-mouse"></i> Mouse</li>
+                    <li class="problem-item"><i class="fa-solid fa-desktop"></i> Monitor</li>
+                    <li class="problem-item"><i class="fa-solid fa-microchip"></i> CPU</li>
+                    <li class="problem-item"><i class="fa-solid fa-wifi"></i> Internet</li>
+                    <li class="problem-item"><i class="fa-solid fa-gear"></i> Other</li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Corrected Footer Section -->
+    <footer id="footer">
+        <div class="brand">
+            <div class="name">
+                <h2 style="font-size: 18px;">CLMMS</h2>
+            </div>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+    // 1. Gather form values
+        const pcNumber = document.getElementById('pcNumber').value;
+        const problemType = document.getElementById('problemType').value;
+        const description = document.getElementById('description').value;
+        const reporterName = document.getElementById('yourName').value.trim() || 'Anonymous';
+
+    // 2. Create report object
+        const newReport = {
+        id: 'REP-' + Date.now(),
+        pcNumber: pcNumber,
+        problemType: problemType,
+        description: description,
+        reporterName: reporterName,
+        status: 'Pending', // New reports default to Pending
+        date: new Date().toLocaleDateString()
+        };
+
+    // 3. Fetch existing reports array from localStorage or initialize empty array
+        const reports = JSON.parse(localStorage.getItem('clmms_reports')) || [];
+
+    // 4. Push new report and save back to localStorage
+        reports.push(newReport);
+        localStorage.setItem('clmms_reports', JSON.stringify(reports));
+
+    // 5. Reset form and inform user
+        alert('Report submitted successfully!');
+        window.location.href = 'reportDisplay.html';
+    });
+</script>
+</body>
+</html>

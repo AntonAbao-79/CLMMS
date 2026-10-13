@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style>
+		body {
+	        margin: 0;
+	        background-color: #f1fbfc;
+	        font-family: Arial, sans-serif;
+        }
+        #header {
+	        display: flex;
+	        padding: 15px 20px;
+	        background-color: #014377;
+	        justify-content: space-between;
+	        align-items: center;
+	        margin: 0;
+        }
+        .brand {
+	        gap: 20px;
+	        display: flex;
+	        align-items: center;
+        }
+        .logo img {
+        	filter: brightness(2) invert(-1);
+	        width: 60px;
+	        height: auto;
+	        background-color: #f1fbfc;
+	        mix-blend-mode: screen;
+        }
+        .name h2 {
+	        color: white;
+	        font-size: 26px;
+	        letter-spacing: 1px;
+	        float: left;
+        }
+        .navBar {
+	        display: flex;
+	        align-items: center;
+	        gap: 20px;
+        }
+        .navBar nav {
+	        display: flex;
+	        padding: 0;
+	        margin: 0;
+	        list-style-type: none;
+	        align-items: center;
+        }
+        nav li a {
+	        float: right;
+	        color: white;
+	        font-size: 15px;
+	        text-decoration: none;
+	        padding: 8px 16px;
+	        font-weight: bold;
+        }
+        nav li a.active {
+	        border-bottom: 3px solid white;
+	        padding-bottom: 5px;
+        }
+        .navigate {
+        	display: flex;
+        	padding: 50px 40px;
+        	gap: 25px;
+        	padding-bottom: 0px;
+        }
+        .navigate img {
+        	width: 90px;
+        	height: 90px;
+        	border: none;
+        	background-color: #014377;
+        }
+        .navigate h2 {
+        	font-family: Georgia, serif;
+        	font-size: 30px;
+        	color: #014377;
+        	font-weight: bold;
+        }
+        #para {
+        	font-family: Georgia, serif;
+        	padding: 8px 40px;
+        	padding-top: 0px;
+        	line-height: 10px;
+        	font-size: 20px;
+        	color: #014377;
+        }
+        .gallery {
+        	display: grid;
+        	grid-template-columns: 1fr 1fr 1fr;
+        	margin: 20px 45px;
+        	gap: 18px;
+        }
+        .card {
+        	border: 1px solid white;
+        	padding: 0px 25px 0px 25px;
+        }
+        .card img {
+			width: 100%;
+			height: 170px;
+			display: block;
+			object-fit: cover;
+			margin: 0 auto 10px;
+			border: none;
+		}
+		.card p {
+			font-size: 17px;
+			text-align: left;
+			color: #014377;
+			font-weight: bold;
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+		.card video {
+    		width: 100%;
+    		height: auto;
+    		aspect-ratio: 16 / 9;
+    		object-fit: cover;
+    		display: block;
+    		margin: 0 auto 10px;
+    		border: none;
+		}
+		#footer {
+	display: flex;
+	padding: 15px 20px;
+	background-color: #014377;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 50px;
+}
+/* Container for icons in the navBar */
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 15px;
+}
+
+/* Style for Font Awesome circular icons */
+.social-icons .fa {
+    width: 28px;
+    height: 28px;
+    padding: 5px;
+    background-color: white;
+    color: #014377;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  @media screen and (max-width: 786px) {
+			/* Gallery: Stack images in 2 columns */
+			.gallery {
+				grid-template-columns: repeat(2, 1fr);
+				margin: 20px;
+				gap: 12px;
+			}
+
+			/* Video stays horizontal across the full width (spans 2 columns) */
+			.card.video-card {
+				grid-column: span 2;
+			}
+
+			.card img {
+				height: 120px;
+			}
+
+			/* Header & Footer Responsive Adjustments */
+			#header, #footer {
+				flex-direction: column;
+				gap: 15px;
+				padding: 20px;
+				text-align: center;
+			}
+
+			.navBar {
+				flex-direction: column;
+				gap: 15px;
+				width: 100%;
+			}
+
+			.navBar nav {
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 10px;
+			}
+
+			nav li a {
+				padding: 6px 10px;
+			}
+
+			.navigate {
+				flex-direction: column;
+				text-align: center;
+				padding: 30px 20px 0;
+			}
+
+			#para {
+				text-align: center;
+				padding: 10px 20px;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<div id="header">
+
+		<div class="brand">
+
+			<div class="logo"><img src="images/logo.png"></div>
+
+			<div class="name"><h2>CLMMS</h2></div>
+		
+		</div>
+		
+
+		<div class="navBar">
+			
+
+			<nav>
+
+				<li><a href="index.html">Home</a></li>
+				<li><a href="issueReports.html">Report Issue</a></li>
+				<li><a href="reportDisplay.html">Reports</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><a href="gallery.html" class="active">Gallery</a></li>
+			
+			</nav>
+
+
+		</div>
+
+
+	</div>
+
+
+
+
+
+	<nav class="navigate">
+
+			<img src="images/images/gallery.jpg">
+
+		    <h2>Computer Laboratory Gallery</h2>
+
+    </nav>
+
+    
+    <div id="para">
+    	<p>Photos of our computer lab and facilities.</p>
+    </div>
+
+
+	<section class="gallery">
+
+
+		<div class="card">
+			
+			<img src="images/labFacilities.jpg">
+
+			<p>Lab Facilities</p>
+			
+		</div>
+
+
+		<div class="card">
+			
+			<img src="images/computerSetup.jpg">
+
+			<p>Computer Setup</p>
+
+		</div>
+
+
+
+		<div class="card">
+			
+			<img src="images/mouse.jpg">
+
+			<p>Keyboards and Mouse</p>
+
+		</div>
+
+
+		<div class="card">
+			
+			<img src="images/LE.jpg">
+
+			<p>Learnng Environment</p>
+
+		</div>
+
+
+		<div class="card">
+			
+			<img src="images/NE.jpg">
+
+			<p>Network Equipment</p>
+
+		</div>
+
+		
+		<div class="card">
+			
+			<video controls>
+                <source src="/mediavideo.mp4" type="video/mp4">
+            </video>
+
+			<p>Lab Tour Videos</p>
+
+		</div>
+
+		
+			
+			
+	</section>
+
+
+
+	<div id="footer">
+
+		<div class="brand">
+
+			<div class="logo"><img src="images/logo.png"></div>
+
+			<div class="name"><h2>CLMMS</h2></div>
+
+		</div>
+
+
+		<div class="navBar">
+
+			<nav>
+
+				<li><a href="index.html">Home</a></li>
+				<li><a href="issueReports.html">Report Issue</a></li>
+				<li><a href="reportDisplay.html">Reports</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><a href="gallery.html">Gallery</a></li>
+
+			</nav>
+
+
+			<div class="social-icons">
+
+				<a href="#" class="fa fa-facebook"></a>
+				<a href="#" class="fa fa-google"></a>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+</body>
+</html>
